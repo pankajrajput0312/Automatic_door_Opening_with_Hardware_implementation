@@ -11,7 +11,6 @@ def add_details(Name, unique_id, email_id, phone_no):
         # Add contents of list as last row in the csv file
         csv_writer.writerow(list_of_elem)
         write_obj.close()
-# add_details("anand","456","anand_fake_mail@gmail.com")
 
 
 def get_date_time():
@@ -33,5 +32,8 @@ def update_incoming_list(Name, unique_id, email_id, phone_no):
         write_obj.close()
 
 
-# update_incoming_list(
-#     "Pankaj", "312", "pankajrajput020010@gmail.com", 9315630275)
+if __name__ == "__main__":
+    # add_details("anand", "456", "anand_fake_mail@gmail.com", "9876544321")
+
+    update_incoming_list(
+        "Pankaj", "312", "pankajrajput020010@gmail.com", 9315630275)
