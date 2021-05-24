@@ -10,7 +10,7 @@ import pandas as pd
 import face_recognize2
 import datetime
 from sms_send import send_sms
-# import move_stepper
+import move_stepper
 
 
 def function():
@@ -60,7 +60,7 @@ def function():
                     send_sms(9315630275, Id)
 
                     from get_details import details
-                    # move_stepper.stepper_move(90)
+                    move_stepper.stepper_move(90)
                     person_details = list(details(Id))
                     door_open = True
 
@@ -71,7 +71,7 @@ def function():
                     door_opening_differnce = curr_time - door_opening_time
                     seconds = door_opening_differnce.total_seconds()
                     if(seconds > 20):
-                        # move_stepper.stepper_move(90)
+                        move_stepper.stepper_move(90)
                         door_open = False
                         print("Now Door Closing, Thank you for coming")
                 # print(Id, confidence)
