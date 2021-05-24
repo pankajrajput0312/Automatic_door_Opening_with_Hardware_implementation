@@ -131,7 +131,7 @@ def collect_data(faceNet):
         cv2.imshow("frame", frame)
         if cv2.waitKey(100) & 0xFF == ord('q'):
             break
-        elif(img_count > 200):
+        elif(img_count > 150):
             break
 
     cap.release()

@@ -46,12 +46,12 @@ def send_sms(number, Id):
         "numbers": number,
         "message": message_admin
     }
-    response_voileter = requests.get(url, params=prams_voileter)
-    response_admin = requests.get(url, params=prams_admin)
-    dic_violeter = response_voileter.json()
-    dic_admin = response_admin.json()
-    print(dic_violeter)
-    print(dic_admin)
+    # response_voileter = requests.get(url, params=prams_voileter)
+    # response_admin = requests.get(url, params=prams_admin)
+    # dic_violeter = response_voileter.json()
+    # dic_admin = response_admin.json()
+    # print(dic_violeter)
+    # print(dic_admin)
 
 
 if __name__ == "__main__":

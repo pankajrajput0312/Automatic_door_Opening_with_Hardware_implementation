@@ -8,29 +8,29 @@ import cv2
 import os
 import pandas as pd
 import face_recognize2
+import datetime
+# import move_stepper
 
 
 def function():
-
+    door_opening_time = 0
     # load our serialized face detector model from disk
     prototxtPath = r"./face_detector/deploy.prototxt"
     weightsPath = r"./face_detector/res10_300x300_ssd_iter_140000.caffemodel"
     recognizer = cv2.face.LBPHFaceRecognizer_create()  # cv2.createLBPHFaceRecognizer()
     recognizer.read("trained_model.yml")
-    # prototxtPath = r"face_detector\deploy.prototxt"
-    # weightsPath = r"face_detector\res10_300x300_ssd_iter_140000.caffemodel"
     faceNet = cv2.dnn.readNet(prototxtPath, weightsPath)
     print("[INFO] starting video stream...")
+
     vs = VideoStream(src=0).start()
     time = None
     check = False
+    starting_time = datetime.datetime.now()
+    door_open = False
     while True:
         frame = vs.read()
-        frame = imutils.resize(frame, width=400)
+        frame = imutils.resize(frame, width=600)
 
-        # detect faces in the frame and determine if they are wearing a
-        # face mask or not
-        # (locs, preds) = detect_and_predict_mask(frame, faceNet, maskNet)
         locs = get_face.detect_faces(frame, faceNet)
 
         # loop over the detected face locations and their corresponding
@@ -45,14 +45,35 @@ def function():
             # determine the class label and color we'll use to draw
             # the bounding box and text
             Id, confidence = face_recognize2.testing(image, recognizer)
+            curr_time = datetime.datetime.now()
 
-            if(check == False):
+            time_delta = (curr_time - starting_time)
+            total_seconds = time_delta.total_seconds()
+
+            if(check == False and total_seconds > 5):
+                print(total_seconds)
                 check = True
-
+                door_opening_time = datetime.datetime.now()
                 from sms_send import send_sms
 
                 send_sms(9315630275, Id)
-            print(Id, confidence)
+
+                from get_details import details
+                # move_stepper.stepper_move(90)
+                person_details = list(details(Id))
+                door_open = True
+
+                print("Welcome to our House....")
+                print("door opens for Next 20 seconds "+str(person_details[1])+" unique_id "+str(
+                    person_details[0])+" Email_id: "+str(person_details[2]))
+            elif(check == True and door_open == True):
+                door_opening_differnce = curr_time - door_opening_time
+                seconds = door_opening_differnce.total_seconds()
+                if(seconds > 20):
+                    # move_stepper.stepper_move(90)
+                    door_open = False
+                    print("Now Door Closing, Thank you for coming")
+            # print(Id, confidence)
 
             label = "{}".format(str(Id))
 
