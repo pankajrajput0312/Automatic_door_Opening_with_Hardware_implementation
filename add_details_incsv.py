@@ -5,7 +5,7 @@ def add_details(Name, unique_id, email_id, phone_no):
     list_of_elem = [unique_id, Name, email_id, phone_no]
     from csv import writer
     # Open file in append mode
-    with open("valid_person_data/data.csv", 'a') as write_obj:
+    with open("valid_person_data/data.csv", '+a') as write_obj:
         # Create a writer object from csv module
         csv_writer = writer(write_obj)
         # Add contents of list as last row in the csv file

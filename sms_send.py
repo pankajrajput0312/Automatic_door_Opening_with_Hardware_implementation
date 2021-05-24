@@ -16,43 +16,54 @@ def send_sms(number, Id):
     import pandas as pd
     from get_details import details
     from add_details_incsv import update_incoming_list
+
     url = "https://www.fast2sms.com/dev/bulk"
     number = 9810904773
-    person_details = list(details(Id))
-    date, time = get_date_time()
-    message_admin = "Person Name "+str(person_details[1])+" unique_id "+str(
-        person_details[0])+" Email_id: "+str(person_details[2])+" Entered in your House at " + date + " "+time
-    user_number = str(person_details[3])
-    update_incoming_list(
-        person_details[1], person_details[0], person_details[2], user_number)
-    message_violeter = "Welcome for coming in our House. We are Waiting for you. Directly come to 2nd Floor"
+    message_admin = ""
+    print(Id)
+    if(Id == 0):
+        message_admin = "Unknown person visited your house please check..."
+    else:
+        person_details = list(details(Id))
+        date, time = get_date_time()
+        message_admin = "Person Name "+str(person_details[1])+" unique_id "+str(
+            person_details[0])+" Email_id: "+str(person_details[2])+" Entered in your House at " + date + " "+time
+        user_number = str(person_details[3])
+        update_incoming_list(
+            person_details[1], person_details[0], person_details[2], user_number)
+        message_violeter = "Welcome for coming in our House. We are Waiting for you. Directly come to 2nd Floor"
 
     print(message_admin)
 
-    prams_voileter = {
-        "authorization": "Q7BKRrYei2pxU0z8t1D4gOuJFPLNaydIqmhbTk5fVoXWAElGcvOv71o4hVmin3cfZdDIFG56rwqjYNX9",
-        "sender_id": "FSTSMS",
-        "route": "p",
-        "language": "unicode",
-        "numbers": user_number,
-        "message": message_violeter
-    }
+    if(Id != 0):
+        # print("enter into sending message to volunteer zone")
+        prams_voileter = {
+            "authorization": "Q7BKRrYei2pxU0z8t1D4gOuJFPLNaydIqmhbTk5fVoXWAElGcvOv71o4hVmin3cfZdDIFG56rwqjYNX9",
+            "sender_id": "FSTSMS",
+            "route": "p",
+            "language": "unicode",
+            "numbers": user_number,
+            "message": message_violeter
+        }
+        response_voileter = requests.get(url, params=prams_voileter)
+        dic_violeter = response_voileter.json()
+        print(dic_violeter)
 
     prams_admin = {
         "authorization": "ZiIlOWv3bzgP1wxkscar0Gyu4CTYhQeS9H87KDUdnBjMLJ2qpoLplP9A6SXMxNRWijcsv3OJtYqTrd4u",
         "sender_id": "FSTSMS",
         "route": "p",
         "language": "unicode",
-        "numbers": number,
+        "numbers": 9810904773,
         "message": message_admin
     }
-    # response_voileter = requests.get(url, params=prams_voileter)
-    # response_admin = requests.get(url, params=prams_admin)
-    # dic_violeter = response_voileter.json()
-    # dic_admin = response_admin.json()
-    # print(dic_violeter)
-    # print(dic_admin)
+
+    response_admin = requests.get(url, params=prams_admin)
+    dic_admin = response_admin.json()
+    print(dic_admin)
 
 
 if __name__ == "__main__":
-    send_sms(9810904773, 312)
+    send_sms(9810904773, 9876)
+    print("check for unknown")
+    send_sms(9315630275, 0)
