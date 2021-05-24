@@ -40,12 +40,12 @@ python final_file.py
 
 
 ## Sample Video
-- **Servo Motor Rotation through Jetson GPIO pins**
+**Servo Motor Rotation through Jetson GPIO pins**
 <br>
 ![only_servo_motor_rotation_demo](https://github.com/pankajrajput0312/Automatic_door_Opening_with_Hardware_implementation/blob/main/img_%26_demo/only_servo_motor_rotation_demo.gif )
 <br>
 
-- **Face Recognition with Door opening Demo**
+**Face Recognition with Door opening Demo**
 <br>
  ![alt text][gif]
  
