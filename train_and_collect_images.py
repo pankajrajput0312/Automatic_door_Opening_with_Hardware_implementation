@@ -192,7 +192,7 @@ def add_new_person():
     # prototxtPath = r"face_detector\deploy.prototxt"
     # weightsPath = r"face_detector\res10_300x300_ssd_iter_140000.caffemodel"
     faceNet = cv2.dnn.readNet(prototxtPath, weightsPath)
-    collect_data(faceNet)
+    # collect_data(faceNet)
     print("collect data successfullt")
     print("model training start...")
     train_data()

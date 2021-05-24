@@ -33,7 +33,7 @@ def update_incoming_list(Name, unique_id, email_id, phone_no):
 
 
 if __name__ == "__main__":
-    # add_details("anand", "456", "anand_fake_mail@gmail.com", "9876544321")
+    add_details("anand", "456", "anand_fake_mail@gmail.com", "9876544321")
 
-    update_incoming_list(
-        "Pankaj", "312", "pankajrajput020010@gmail.com", 9315630275)
+    # update_incoming_list(
+    #     "Pankaj", "312", "pankajrajput020010@gmail.com", 9315630275)

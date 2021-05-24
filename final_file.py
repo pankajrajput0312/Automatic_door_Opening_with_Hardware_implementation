@@ -73,7 +73,7 @@ def function():
                     # move_stepper.stepper_move(90)
                     door_open = False
                     print("Now Door Closing, Thank you for coming")
-            # print(Id, confidence)
+            print(Id, confidence)
 
             label = "{}".format(str(Id))
 
